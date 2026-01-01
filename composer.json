@@ -1,0 +1,21 @@
+{
+    "name": "bikecoderslife/map-bundle",
+    "description": "Self-hosted Maps Bundle using Protomaps and MapLibre",
+    "type": "symfony-bundle",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.2",
+        "symfony/framework-bundle": "^6.4|^7.0",
+        "symfony/dependency-injection": "^6.4|^7.0",
+        "symfony/config": "^6.4|^7.0",
+        "symfony/http-kernel": "^6.4|^7.0",
+        "doctrine/orm": "^2.10|^3.0",
+        "doctrine/doctrine-bundle": "^2.0|^3.0",
+        "symfony/console": "^6.4|^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BikeCoders\\MapBundle\\": "src/"
+        }
+    }
+}

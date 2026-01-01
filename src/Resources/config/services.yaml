@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+
+    BikeCoders\MapBundle\:
+        resource: '../../{Command,Service,Controller}'
+
+    # Register Entities if needed (requires mapping config usually, or auto-mapping)
