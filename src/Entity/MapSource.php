@@ -1,8 +1,9 @@
 <?php
 
-namespace BikeCoders\MapBundle\Entity;
+namespace BikeCodersLife\MapBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use BikeCodersLife\MapBundle\Repository\MapSourceRepository;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'map_source')]

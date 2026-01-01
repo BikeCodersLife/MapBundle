@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "BikeCoders\\MapBundle\\": "src/"
+            "BikeCodersLife\\MapBundle\\": "src/"
         }
     }
 }

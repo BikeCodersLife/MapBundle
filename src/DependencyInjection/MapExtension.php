@@ -1,13 +1,13 @@
 <?php
 
-namespace BikeCoders\MapBundle\DependencyInjection;
+namespace BikeCodersLife\MapBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 
-class BikeCodersMapExtension extends Extension
+class MapExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {

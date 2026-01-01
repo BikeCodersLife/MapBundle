@@ -1,10 +1,10 @@
 <?php
 
-namespace BikeCoders\MapBundle;
+namespace BikeCodersLife\MapBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class BikeCodersMapBundle extends Bundle
+class MapBundle extends Bundle
 {
     public function getPath(): string
     {

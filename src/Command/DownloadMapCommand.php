@@ -1,8 +1,8 @@
 <?php
 
-namespace BikeCoders\MapBundle\Command;
+namespace BikeCodersLife\MapBundle\Command;
 
-use BikeCoders\MapBundle\Entity\MapSource;
+use BikeCodersLife\MapBundle\Entity\MapSource;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
