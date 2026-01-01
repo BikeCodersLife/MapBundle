@@ -8,6 +8,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -38,9 +39,9 @@ class DownloadMapCommand extends Command
         $this
             ->addArgument('url', InputArgument::OPTIONAL, 'URL to the .pmtiles file', self::DEFAULT_URL)
             ->addArgument('region', InputArgument::OPTIONAL, 'Region Name', 'planet-demo')
-            ->addOption('min-zoom', null, null, 'Minimum Zoom Level', 0)
-            ->addOption('max-zoom', null, null, 'Maximum Zoom Level', 15)
-            ->addOption('bounds', null, null, 'Bounds as JSON [minLon, minLat, maxLon, maxLat]', null)
+            ->addOption('min-zoom', null, InputOption::VALUE_OPTIONAL, 'Minimum Zoom Level', 0)
+            ->addOption('max-zoom', null, InputOption::VALUE_OPTIONAL, 'Maximum Zoom Level', 15)
+            ->addOption('bounds', null, InputOption::VALUE_OPTIONAL, 'Bounds as JSON [minLon, minLat, maxLon, maxLat]', null)
         ;
     }
 
