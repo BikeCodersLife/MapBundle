@@ -1,0 +1,70 @@
+---
+name: CI
+
+on:
+  pull_request: ~
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch: ~
+
+permissions:
+  contents: read
+
+jobs:
+  php-quality:
+    name: PHP Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: sodium, fileinfo, xml, ctype, iconv, dom, intl, mbstring, openssl, simplexml, tokenizer, xmlwriter, pdo, pdo_pgsql
+          tools: composer:v2, cs-fixer, phpstan, psalm
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-scripts
+
+      - name: Security Checker
+        run: composer audit
+
+      - name: PHP CS Fixer (Dry Run)
+        run: |
+          if [ -f ".php-cs-fixer.dist.php" ]; then
+            vendor/bin/php-cs-fixer fix --dry-run --diff
+          else
+            echo "No PHP CS Fixer config found, skipping"
+          fi
+
+      - name: PHPStan
+        run: |
+          if [ -f "phpstan.dist.neon" ] || [ -f "phpstan.neon" ]; then
+            vendor/bin/phpstan analyze
+          else
+            echo "No PHPStan config found, skipping"
+          fi
+
+      - name: Psalm
+        run: |
+          if [ -f "psalm.xml" ] || [ -f "psalm.xml.dist" ]; then
+            vendor/bin/psalm
+          else
+            echo "No Psalm config found, skipping"
+          fi
