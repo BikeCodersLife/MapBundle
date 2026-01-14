@@ -19,6 +19,8 @@ before_script:
 test:
   stage: test
   script:
+    - if [ -f composer.lock ]; then vendor/bin/security-checker security:check; fi
     - if [ -f phpunit.xml ] || [ -f phpunit.xml.dist ]; then vendor/bin/phpunit --colors=never; fi
-    - if [ -f phpstan.neon ] || [ -f phpstan.dist.neon ]; then vendor/bin/phpstan analyse; fi
+    - if [ -f phpstan.neon ] || [ -f phpstan.dist.neon ]; then vendor/bin/phpstan analyse --memory-limit=2G; fi
+    - if [ -f psalm.xml ] || [ -f psalm.xml.dist ]; then vendor/bin/psalm; fi
     - if [ -f .php-cs-fixer.dist.php ]; then vendor/bin/php-cs-fixer fix --dry-run --diff; fi
